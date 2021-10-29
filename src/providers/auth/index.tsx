@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { History } from "history";
+import { toast } from "react-toastify";
 
 interface AuthProps {
   children: ReactNode;
@@ -24,7 +25,6 @@ export const AuthContext = createContext<AuthProviderData>(
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const history = useHistory();
-  console.log(history);
 
   const [authToken, setAuthToken] = useState(
     () => localStorage.getItem("token") || ""
@@ -38,9 +38,11 @@ export const AuthProvider = ({ children }: AuthProps) => {
 
         setAuthToken(response.data.token);
 
+        toast.success("Login Efetuado com sucesso");
+
         history.push("/dashboard");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Problemas na autentificação"));
   };
 
   const Logout = (history: History) => {
@@ -49,6 +51,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
     setAuthToken("");
 
     history.push("/");
+
+    toast.info("Logout realizado");
   };
 
   return (

@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import { AuthProvider } from "./auth";
 
-interface props {
+interface ProviderProps {
   children: ReactNode;
 }
 
-const Providers = ({ children }: props) => {
+const Providers = ({ children }: ProviderProps) => {
   return <AuthProvider>{children}</AuthProvider>;
 };
 

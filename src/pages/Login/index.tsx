@@ -1,5 +1,5 @@
 import Login from "../../components/Login";
-import { Container } from "../Dashboard/styles";
+import { Container } from "../Login/styles";
 
 const LoginPage = () => {
   return (
